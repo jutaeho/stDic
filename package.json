@@ -1,0 +1,18 @@
+{
+  "name": "stdic",
+  "version": "1.0.0",
+  "description": "standard dictionary",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [
+    "pg"
+  ],
+  "author": "taeho",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "pg": "^8.2.1"
+  }
+}
