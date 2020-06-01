@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>행정표준용어 사전</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+	<!-- JS, Popper.js, and jQuery -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 로딩바 -->
+    <div class="loading" style="display: none;"></div>
+    <!-- 로딩바 -->
+
+    <!-- 검색창 -->
+    <div class="jumbotron">
+        <h1 class="display-4">행정표준용어 사전</h1>
+        <hr class="my-4">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button id="btn-toggle" class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">국문명</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" title="국문명">국문명</a>
+                    <a class="dropdown-item" href="#" title="영문명">영문명</a>
+                    <a class="dropdown-item" href="#" title="주제별">주제별</a>
+                </div>
+            </div>
+            <input id="searchTxt" type="text" class="form-control" aria-label="Text input with dropdown button">
+            <div class="input-group-append">
+                <button class="btn btn-dark" type="button" id="btn-search">검색</button>
+            </div>
+        </div>
+    </div>
+    <!-- 검색창 -->
+
+    <!-- 결과창 -->
+	<div class="container-fluid">
+		<h2>검색결과: <span class="badge badge-danger" id="searchCount">0</span></h2>
+	    <table class="table table-striped" id="dataTable">
+	        <thead class="thead-light">
+	            <tr>
+	                <th scope="col">번호</th>
+	                <th scope="col">구분</th>
+	                <th scope="col">국문명</th>
+	                <th scope="col">영문명</th>
+                    <th scope="col">영문약어명</th>
+                    <th scope="col">분류</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        </tbody>
+	    </table>
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center" id="pagination">
+		    <li class="page-item disabled"><a class="page-link" href="#">&lt;&lt;</a></li>
+		    <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+		    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+		    <li class="page-item disabled"><a class="page-link" href="#">&gt;&gt;</a></li>
+		  </ul>
+		</nav>
+	</div>
+    <!-- 검색창 -->
+
+    <!-- 검색 스크립트 -->
+    <script type="text/javascript" src="js/search.js"></script>
+</body>
+
+</html>
