@@ -8,7 +8,7 @@
 
 ## **dotenv**
 
-* env 파일에 연결할 PostgreSQL의 커넥션 정보를 입력
+* .env 파일에 연결할 PostgreSQL의 커넥션 정보를 입력
 
 ```
 db_user=${user}
