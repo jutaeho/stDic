@@ -1,5 +1,18 @@
 # 행정표준용어 사전
 
+## directory
+
+```
++---config
++---db
++---node_modules
+\---src
+    +---css
+    +---images
+    \---js
+
+```
+
 ## **Install**
 
 ```
