@@ -17,11 +17,13 @@ client.connect();
  * @param: request {Object}
  * @param: response {Object}
  * @return:
- * @description: setting query 
+ * @description: setting query
  */
 const set = (request, response) => {
     var params = [];
-    var sql = 'select se, word_ko, word_en, word_ab, thema, count(*) over() as total from std_dic_t';
+    var sql = "select se, word_ko, word_en, word_ab, thema, count(*) over() as total from std_dic_t";
+
+
 
     request.url.split('?')[1].split('&').forEach(n => {
         var key = n.split('=')[0];
@@ -32,12 +34,11 @@ const set = (request, response) => {
 
     var type = decodeURI(params['category']);
 
-    if(type == '국문명') sql += ' where word_ko like \'%' + decodeURI(params['text']) + '%\' limit 5 offset ' + ((params['page'] - 1) * 5);
-    else if(type == '영문명') sql += ' where lower(word_en) like \'%' + decodeURI(params['text'].toLowerCase()) + '%\' limit 5 offset ' + ((params['page'] - 1) * 5);
-    else sql += ' where thema like \'%' + decodeURI(params['text']) + '%\' limit 5 offset ' + ((params['page'] - 1) * 5);
+    if(type == '국문명') sql += " where word_ko like $1 limit 5 offset $2";
+    else if(type == '영문명') sql += " where lower(word_en) like $1 limit 5 offset $2";
+    else sql += " where thema like $1 limit 5 offset $2";
 
-
-    run(response, sql);
+    run(response, sql, params);
 };
 
 /**
@@ -45,16 +46,23 @@ const set = (request, response) => {
  * @param: response {Object}
  * @param: query {String}
  * @return:
- * @description: run query 
+ * @description: run query
  */
-const run = (response, query) => {
+const run = (response, sql, params) => {
+
+    const _q1 = `%${decodeURI(params['text'].toLowerCase())}%`;
+    const _q2 = `${((params['page'] - 1) * 5)}`;
+
     client
-    .query(query)
+    .query(sql, [_q1, _q2])
     .then(result => {
         end(response, 200, result.rowCount, result.rows, 'completed');
     })
     .catch(e => {
         end(response, 500, 0, [], 'failed');
+    })
+    .then(() => {
+        console.log(`${sql}::query end`);
     })
 };
 
@@ -66,9 +74,10 @@ const run = (response, query) => {
  * @param: items {Array}
  * @param: msg {String}
  * @return:
- * @description: end query 
+ * @description: end query
  */
 const end = (response, status, total, items, msg) => {
+
     const res = {
         status: status,
         total: total,
