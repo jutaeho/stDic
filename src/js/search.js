@@ -7,11 +7,24 @@ $(document).ready(function () {
     // 검색어 엔터키 이벤트
     $('#searchTxt').keypress(function (e) {
         if (e.keyCode == 13) setPagination(1);
-    })
+    });
+    $('#searchKor').keypress(function (e) {
+        if (e.keyCode == 13) setPagination(1);
+    });
+    $('#searchEng').keypress(function (e) {
+        if (e.keyCode == 13) setPagination(1);
+    });
+    $('#searchCat').keypress(function (e) {
+        if (e.keyCode == 13) setPagination(1);
+    });
+
 
     // 검색 버튼 클릭 이벤트
     $('#btn-search').click(function () {
         setPagination(1);
+    });
+    $('#btn-more-search').click(function () {
+        setPagination2(1);
     });
 });
 
@@ -27,14 +40,34 @@ function setPagination(pageNum) {
 
     if(!txt) return alert('검색어를 입력하세요.');
 
-    var params = { page: pageNum, category: cat, text: txt };
+    var params = { page: pageNum, kor: kor, eng: eng, cat: cat, thm: '' };
 
     setPagingDataList("/search", params, "#dataTable");
 }
 
 /**
+ * @name:   setPagination
+ * @param: pageNum {String}
+ * @return:
+ * @description: setting pagination value
+ */
+function setPagination2(pageNum) {
+
+    $('#btn-more-close').click();
+
+    var kor = $('#searchKor').val();
+    var eng = $('#searchEng').val();
+    var thm = $('#searchCat').val();
+
+
+    var params = { page: pageNum, kor: kor, eng: eng, cat: cat, thm: thm };
+
+    setPagingDataList("/detail", params, "#dataTable");
+}
+
+/**
  * @name:   resetPagingContent
- * @param: 
+ * @param:
  * @return: html {String}
  * @description: setting pagination value
  */
@@ -54,7 +87,7 @@ function resetPagingContent() {
  * @param: dataSize {Integer}
  * @param: PageSize {Integer}
  * @param: pageNo {Integer}
- * @return: 
+ * @return:
  * @description: create pagination content
  */
 function createPagingContents(totalCnt, dataSize, pageSize, pageNo) {
@@ -130,7 +163,7 @@ function createPagingContents(totalCnt, dataSize, pageSize, pageNo) {
  * @param: url {String}
  * @param: param {Object}
  * @param: container {String}
- * @return: 
+ * @return:
  * @description: create pagination content
  */
 // search pagination data

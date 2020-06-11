@@ -17,7 +17,10 @@ http.createServer((request, response) => {
     }
     else {
         if(request.url.indexOf('/search') > -1 ) {
-            query.set(request, response);
+            query.singl(request, response);
+        }
+        else if(request.url.indexOf('/detail') > -1 ) {
+            query.detail(request, response);
         }
         else {
             readFile(response, indexPath, '.html');
@@ -39,4 +42,4 @@ const readFile = (response, path, ext) => {
             response.end(data);
         }
     });
-}; 
+};
